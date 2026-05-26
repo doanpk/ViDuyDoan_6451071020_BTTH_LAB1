@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'core/colors.dart';
-import 'screens/logo_screen.dart';
+import 'presentation/screens/logo_screen.dart';
 
-void main() {
+void main() async {
+  // Bắt buộc phải có dòng này để Flutter chuẩn bị nền tảng trước khi gọi Firebase
+  WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    // Khởi động Firebase
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  } catch (e) {
+    print("Firebase initialization error: $e");
+  }
+
   runApp(const MyApp());
 }
 
